@@ -1,2 +1,2 @@
-# case-mlflow-flower-classifier
-Case: Flower Classifier with MLflow
+# case-mlflow
+Case: experiment tracking and model serving with MLflow
