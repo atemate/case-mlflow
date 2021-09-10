@@ -15,11 +15,6 @@ REQUIREMENTS_TXT = "{}/../requirements.txt".format(CURRENT_DIR)
 
 def get_parser():
     p = ArgumentParser(description="Run model prediction on a given input")
-    p.add_argument(
-        "--seed",
-        type=int,
-        default=42,
-    )
     p.add_argument("--max-depth", type=int, default=6)
     p.add_argument("--model-name", default=os.getenv("MY_MODEL_NAME", "iris"))
     return p
@@ -27,11 +22,10 @@ def get_parser():
 
 def main(args):
     max_depth = args.max_depth
-    seed = args.seed
     model_name = args.model_name
 
-    ## You can change 'default' experiment name:
-    mlflow.set_experiment("iris")
+    ## Change 'default' experiment name:
+    mlflow.set_experiment("iris-sklearn")
 
     ## Auto-log sklearn metrics
     mlflow.sklearn.autolog(log_models=False)
@@ -39,15 +33,14 @@ def main(args):
     ## Load and split dataset
     iris = datasets.load_iris()
     x_train, x_test, y_train, y_test = train_test_split(
-        iris.data, iris.target, test_size=0.2, random_state=seed
+        iris.data, iris.target, test_size=0.2, random_state=42
     )
 
     ## To log custom parameters:
     mlflow.log_param("max_depth", max_depth)
-    mlflow.log_param("seed", seed)
 
     ## Train the model
-    clf = RandomForestClassifier(max_depth=max_depth, random_state=seed)
+    clf = RandomForestClassifier(max_depth=max_depth)
     clf.fit(x_train, y_train)
 
     ## These values used to define model's signature

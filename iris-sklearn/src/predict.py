@@ -20,7 +20,7 @@ def main(args):
     model_stage = os.getenv("MY_MODEL_STAGE", "Staging")
 
     model_uri = f"models:/{model_name}/{model_stage}"
-    model = mlflow.pyfunc.load_model(model_uri=model_uri)
+    model = mlflow.sklearn.load_model(model_uri=model_uri)
 
     df = pd.read_json(args.json_file, orient="split")
     df["predicted_class"] = model.predict(df)
