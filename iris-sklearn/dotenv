@@ -1,0 +1,3 @@
+MY_MODEL_NAME=iris
+MY_MODEL_STAGE=Staging
+MLFLOW_TRACKING_URI=sqlite:///mlruns.db
