@@ -1,4 +1,4 @@
-LINT_DIRS = . sklearn-iris
+LINT_DIRS = . iris-sklearn
 
 install-dev:
 	pip install -r requirements.txt
